@@ -2,30 +2,30 @@
 package "bikallem/mariadb"
 
 // Values
-fn real_connect(host? : String, port? : UInt, user~ : String, password~ : String, database~ : String, unix_socket? : String, client_flag? : UInt) -> MySql raise
+pub fn real_connect(host? : String, port? : UInt, user~ : String, password~ : String, database~ : String, unix_socket? : String, client_flag? : UInt) -> MySql raise
 
 // Errors
 pub suberror Err (String, UInt, String, SourceLoc)
-impl Show for Err
+pub impl Show for Err
 
 // Types and methods
 type MySql
-fn MySql::affected_rows(Self) -> UInt
-fn MySql::execute(Self, String) -> MySqlRes raise
+pub fn MySql::affected_rows(Self) -> UInt
+pub fn MySql::execute(Self, String) -> MySqlRes raise
 #callsite(autofill(loc))
-fn[T] MySql::fail(Self, String, loc~ : SourceLoc) -> T raise
-fn MySql::real_escape_string(Self, String) -> String
-fn MySql::set_character_set(Self, Bytes) -> Int
+pub fn[T] MySql::fail(Self, String, loc~ : SourceLoc) -> T raise
+pub fn MySql::real_escape_string(Self, String) -> String
+pub fn MySql::set_character_set(Self, Bytes) -> Int
 
 type MySqlRes
-fn MySqlRes::fetch_row(Self) -> MySqlRow?
-fn MySqlRes::iter(Self) -> Iter[MySqlRow]
-fn MySqlRes::num_fields(Self) -> UInt
+pub fn MySqlRes::fetch_row(Self) -> MySqlRow?
+pub fn MySqlRes::iter(Self) -> Iter[MySqlRow]
+pub fn MySqlRes::num_fields(Self) -> UInt
 
 type MySqlRow
-fn[T : ResColumnValue] MySqlRow::get(Self, Int) -> T?
+pub fn[T : ResColumnValue] MySqlRow::get(Self, Int) -> T?
 #alias("_[_]")
-fn[T : ResColumnValue] MySqlRow::unsafe_get(Self, Int) -> T raise
+pub fn[T : ResColumnValue] MySqlRow::unsafe_get(Self, Int) -> T raise
 
 // Type aliases
 
@@ -33,12 +33,12 @@ fn[T : ResColumnValue] MySqlRow::unsafe_get(Self, Int) -> T raise
 pub(open) trait ResColumnValue {
   to(Bytes) -> Self raise
 }
-impl ResColumnValue for Bool
-impl ResColumnValue for Int
-impl ResColumnValue for Int64
-impl ResColumnValue for UInt
-impl ResColumnValue for Float
-impl ResColumnValue for Double
-impl ResColumnValue for String
-impl ResColumnValue for Bytes
+pub impl ResColumnValue for Bool
+pub impl ResColumnValue for Int
+pub impl ResColumnValue for Int64
+pub impl ResColumnValue for UInt
+pub impl ResColumnValue for Float
+pub impl ResColumnValue for Double
+pub impl ResColumnValue for String
+pub impl ResColumnValue for Bytes
 

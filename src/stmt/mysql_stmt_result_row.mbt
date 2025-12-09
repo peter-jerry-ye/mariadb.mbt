@@ -68,5 +68,5 @@ pub impl StmtResultColumnValue for String with to(value : Bytes) -> String {
 
 ///|
 pub impl StmtResultColumnValue for Bytes with to(value : Bytes) -> Bytes {
-  return value
+  value
 }

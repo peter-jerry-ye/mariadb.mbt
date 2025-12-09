@@ -6,16 +6,16 @@ import(
 )
 
 // Values
-fn stmt_prepare(@mariadb.MySql, String, param_types? : Array[MySqlStmtParam]) -> MySqlStmt raise
+pub fn stmt_prepare(@mariadb.MySql, String, param_types? : Array[MySqlStmtParam]) -> MySqlStmt raise
 
 // Errors
 pub suberror MySqlStmtError (String, UInt, String, SourceLoc)
-impl Show for MySqlStmtError
+pub impl Show for MySqlStmtError
 
 // Types and methods
 type MySqlStmt
-fn MySqlStmt::execute(Self, param_values? : Map[Int, &MySqlStmtParamValue], result_field_types? : Array[MySqlStmtParam]) -> Unit raise
-fn MySqlStmt::fetch(Self) -> MySqlStmtFetchResult
+pub fn MySqlStmt::execute(Self, param_values? : Map[Int, &MySqlStmtParamValue], result_field_types? : Array[MySqlStmtParam]) -> Unit raise
+pub fn MySqlStmt::fetch(Self) -> MySqlStmtFetchResult
 
 pub enum MySqlStmtFetchResult {
   Data(MySqlStmtResultRow)
@@ -37,9 +37,9 @@ pub(all) enum MySqlStmtParam {
 }
 
 type MySqlStmtResultRow
-fn[T : StmtResultColumnValue] MySqlStmtResultRow::get(Self, Int) -> T?
+pub fn[T : StmtResultColumnValue] MySqlStmtResultRow::get(Self, Int) -> T?
 #alias("_[_]")
-fn[T : StmtResultColumnValue] MySqlStmtResultRow::unsafe_get(Self, Int) -> T raise
+pub fn[T : StmtResultColumnValue] MySqlStmtResultRow::unsafe_get(Self, Int) -> T raise
 
 // Type aliases
 
@@ -47,25 +47,25 @@ fn[T : StmtResultColumnValue] MySqlStmtResultRow::unsafe_get(Self, Int) -> T rai
 pub trait MySqlStmtParamValue {
   value(Self) -> (Bytes, Int)
 }
-impl MySqlStmtParamValue for Bool
-impl MySqlStmtParamValue for Int
-impl MySqlStmtParamValue for Int64
-impl MySqlStmtParamValue for UInt
-impl MySqlStmtParamValue for UInt64
-impl MySqlStmtParamValue for Float
-impl MySqlStmtParamValue for Double
-impl MySqlStmtParamValue for String
-impl MySqlStmtParamValue for Bytes
+pub impl MySqlStmtParamValue for Bool
+pub impl MySqlStmtParamValue for Int
+pub impl MySqlStmtParamValue for Int64
+pub impl MySqlStmtParamValue for UInt
+pub impl MySqlStmtParamValue for UInt64
+pub impl MySqlStmtParamValue for Float
+pub impl MySqlStmtParamValue for Double
+pub impl MySqlStmtParamValue for String
+pub impl MySqlStmtParamValue for Bytes
 
 pub(open) trait StmtResultColumnValue {
   to(Bytes) -> Self raise
 }
-impl StmtResultColumnValue for Bool
-impl StmtResultColumnValue for Int
-impl StmtResultColumnValue for Int64
-impl StmtResultColumnValue for UInt
-impl StmtResultColumnValue for Float
-impl StmtResultColumnValue for Double
-impl StmtResultColumnValue for String
-impl StmtResultColumnValue for Bytes
+pub impl StmtResultColumnValue for Bool
+pub impl StmtResultColumnValue for Int
+pub impl StmtResultColumnValue for Int64
+pub impl StmtResultColumnValue for UInt
+pub impl StmtResultColumnValue for Float
+pub impl StmtResultColumnValue for Double
+pub impl StmtResultColumnValue for String
+pub impl StmtResultColumnValue for Bytes
 

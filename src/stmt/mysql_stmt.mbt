@@ -93,11 +93,11 @@ fn params_to_mysql_binds(
         types.push(mysql_type_string())
       }
       Blob(max_length) => {
-        sizes[i] = max_length
+        sizes.push(max_length)
         types.push(mysql_type_blob())
       }
       Bool => {
-        sizes[i] = 4
+        sizes.push(4)
         types.push(mysql_type_long())
       }
     }
